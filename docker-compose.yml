@@ -1,0 +1,9 @@
+services:
+  grande-benchmark:
+    build: .
+    volumes:
+      - ./results:/app/results
+      - ./data:/app/data
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: python -m src.run_benchmark 
