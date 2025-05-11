@@ -1,11 +1,12 @@
-#import sys
-#sys.path.append('./utilities/TabSurvey/')
+import sys
+sys.path.append('/app/experiments_paper/utilities/TabSurvey')
 
 import time
 
-from models import node_lib
-from models.basemodel_torch import BaseModelTorch
-from models.node_lib.utils import check_numpy, process_in_chunks
+# Fix relative imports
+from utilities.TabSurvey.models import node_lib
+from utilities.TabSurvey.models.basemodel_torch import BaseModelTorch
+from utilities.TabSurvey.models.node_lib.utils import check_numpy, process_in_chunks
 
 import torch
 import torch.nn as nn

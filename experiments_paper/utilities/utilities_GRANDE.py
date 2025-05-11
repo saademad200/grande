@@ -19,32 +19,22 @@ import numpy as np
 np.seterr(all="ignore")
 
 import sklearn
-from sklearn.model_selection import train_test_split, ParameterGrid, ParameterSampler, GridSearchCV, RandomizedSearchCV, StratifiedKFold, KFold
+from sklearn.model_selection import train_test_split, StratifiedKFold, KFold
 from sklearn.tree import DecisionTreeClassifier, plot_tree, DecisionTreeRegressor
-from sklearn.metrics import accuracy_score, f1_score
-from sklearn.compose import ColumnTransformer
-from sklearn.preprocessing import OneHotEncoder, MinMaxScaler, LabelEncoder, OrdinalEncoder, StandardScaler, KBinsDiscretizer, RobustScaler, QuantileTransformer
-from category_encoders.leave_one_out import LeaveOneOutEncoder
-from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor,  GradientBoostingClassifier,  GradientBoostingRegressor
+from sklearn.preprocessing import OneHotEncoder, MinMaxScaler, LabelEncoder, OrdinalEncoder, StandardScaler, KBinsDiscretizer, QuantileTransformer
+from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
 
 from catboost import CatBoostClassifier, CatBoostRegressor, Pool
 
 import category_encoders as ce
 import torch
-import datasets
 import pickle
 
-from scipy.io.arff import loadarff 
-
-from livelossplot import PlotLosses
 from collections import Counter
 
 from tqdm.notebook import tqdm
 from matplotlib import pyplot as plt
 
-import tqdm as tqdm_normal
-
-from IPython.display import Image
 from IPython.display import display, clear_output
 
 import pandas as pd
