@@ -1,9 +1,30 @@
 services:
-  grande-benchmark:
+  grande-gpu:
     build: .
+    # Use both runtime and devices approach for maximum compatibility
+    runtime: nvidia
     volumes:
       - ./results:/app/results
       - ./data:/app/data
+      - ./experiments_paper:/app/experiments_paper
     environment:
       - PYTHONUNBUFFERED=1
-    command: python -m src.run_benchmark 
+      - NVIDIA_VISIBLE_DEVICES=all
+      - PYTHONPATH=/app:/app/experiments_paper:/app/experiments_paper/utilities/TabSurvey
+      - CUDA_VISIBLE_DEVICES=0
+    # Legacy device pass-through
+    devices:
+      - /dev/nvidia0:/dev/nvidia0
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu, utility]
+    ports:
+      - "8888:8888"
+    command: >-
+      bash -c "mkdir -p /home/jovyan/.jupyter && 
+               python3 -m ipykernel install --user --name=grande --display-name='Python (GRANDE)' &&
+               jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root --NotebookApp.token='' --NotebookApp.password=''" 
